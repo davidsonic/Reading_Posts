@@ -51,6 +51,11 @@
          <changefreq>daily</changefreq>
     </url>
     <url>
+         <loc>https://davidsonic.github.io/Reading_Posts/multimodal/</loc>
+         <lastmod>2022-02-04</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
          <loc>https://davidsonic.github.io/Reading_Posts/node/</loc>
          <lastmod>2022-02-04</lastmod>
          <changefreq>daily</changefreq>
@@ -77,6 +82,16 @@
     </url>
     <url>
          <loc>https://davidsonic.github.io/Reading_Posts/utils/</loc>
+         <lastmod>2022-02-04</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://davidsonic.github.io/Reading_Posts/detections/faster-rcnn/</loc>
+         <lastmod>2022-02-04</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://davidsonic.github.io/Reading_Posts/detections/overview/</loc>
          <lastmod>2022-02-04</lastmod>
          <changefreq>daily</changefreq>
     </url>
@@ -137,6 +152,16 @@
     </url>
     <url>
          <loc>https://davidsonic.github.io/Reading_Posts/extensions/trains/</loc>
+         <lastmod>2022-02-04</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://davidsonic.github.io/Reading_Posts/multimodal/codis/</loc>
+         <lastmod>2022-02-04</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://davidsonic.github.io/Reading_Posts/multimodal/overview/</loc>
          <lastmod>2022-02-04</lastmod>
          <changefreq>daily</changefreq>
     </url>

@@ -10,21 +10,21 @@
       
       
       
-        <link rel="canonical" href="https://davidsonic.github.io/Reading_Posts/examples/imdb/">
+        <link rel="canonical" href="https://davidsonic.github.io/Reading_Posts/multimodal/">
       
-      <link rel="icon" href="../../img/favicon.png">
+      <link rel="icon" href="../img/favicon.png">
       <meta name="generator" content="mkdocs-1.2.3, mkdocs-material-8.1.9">
     
     
       
-        <title>Imdb - Reading Posts</title>
+        <title>Multi-modal Representation Learning - Reading Posts</title>
       
     
     
-      <link rel="stylesheet" href="../../assets/stylesheets/main.2b4465f4.min.css">
+      <link rel="stylesheet" href="../assets/stylesheets/main.2b4465f4.min.css">
       
         
-        <link rel="stylesheet" href="../../assets/stylesheets/palette.e6a45f82.min.css">
+        <link rel="stylesheet" href="../assets/stylesheets/palette.e6a45f82.min.css">
         
       
     
@@ -38,9 +38,9 @@
       
     
     
-      <link rel="stylesheet" href="../../stylesheets/extra.css">
+      <link rel="stylesheet" href="../stylesheets/extra.css">
     
-    <script>__md_scope=new URL("../..",location),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    <script>__md_scope=new URL("..",location),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
 
@@ -63,6 +63,11 @@
     <label class="md-overlay" for="__drawer"></label>
     <div data-md-component="skip">
       
+        
+        <a href="#multi-modal-representation-learning" class="md-skip">
+          Skip to content
+        </a>
+      
     </div>
     <div data-md-component="announce">
       
@@ -73,9 +78,9 @@
 
 <header class="md-header" data-md-component="header">
   <nav class="md-header__inner md-grid" aria-label="Header">
-    <a href="../.." title="Reading Posts" class="md-header__button md-logo" aria-label="Reading Posts" data-md-component="logo">
+    <a href=".." title="Reading Posts" class="md-header__button md-logo" aria-label="Reading Posts" data-md-component="logo">
       
-  <img src="../../img/logo_white.svg" alt="logo">
+  <img src="../img/logo_white.svg" alt="logo">
 
     </a>
     <label class="md-header__button md-icon" for="__drawer">
@@ -91,7 +96,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Imdb
+              Multi-modal Representation Learning
             
           </span>
         </div>
@@ -170,9 +175,9 @@
 
 <nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
   <label class="md-nav__title" for="__drawer">
-    <a href="../.." title="Reading Posts" class="md-nav__button md-logo" aria-label="Reading Posts" data-md-component="logo">
+    <a href=".." title="Reading Posts" class="md-nav__button md-logo" aria-label="Reading Posts" data-md-component="logo">
       
-  <img src="../../img/logo_white.svg" alt="logo">
+  <img src="../img/logo_white.svg" alt="logo">
 
     </a>
     Reading Posts
@@ -226,7 +231,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../detections/overview/" class="md-nav__link">
+      <a href="../detections/overview/" class="md-nav__link">
         Overview
       </a>
     </li>
@@ -240,7 +245,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../detections/faster-rcnn/" class="md-nav__link">
+      <a href="../detections/faster-rcnn/" class="md-nav__link">
         Faster-RCNN
       </a>
     </li>
@@ -288,7 +293,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../multimodal/overview/" class="md-nav__link">
+      <a href="overview/" class="md-nav__link">
         Overview
       </a>
     </li>
@@ -302,7 +307,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../multimodal/codis/" class="md-nav__link">
+      <a href="codis/" class="md-nav__link">
         Multimodal-Codebook
       </a>
     </li>
@@ -324,7 +329,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../about/" class="md-nav__link">
+      <a href="../about/" class="md-nav__link">
         About
       </a>
     </li>
@@ -338,69 +343,66 @@
               </div>
             
             
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#install-autokeras" class="md-nav__link">
+    Install AutoKeras
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
           
           <div class="md-content" data-md-component="content">
             <article class="md-content__inner md-typeset">
               
                 
 
-  <h1>Imdb</h1>
-
-<p>Search for a good model for the
-<a href="https://keras.io/datasets/#imdb-movie-reviews-sentiment-classification">IMDB</a> dataset.</p>
-<div class="highlight"><pre><span></span><code><span class="n">Search</span> <span class="k">for</span> <span class="n">a</span> <span class="n">good</span> <span class="n">model</span> <span class="k">for</span> <span class="n">the</span>
-<span class="p">[</span><span class="n">IMDB</span><span class="p">](</span>
-<span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">keras</span><span class="o">.</span><span class="n">io</span><span class="o">/</span><span class="n">datasets</span><span class="o">/</span><span class="c1">#imdb-movie-reviews-sentiment-classification) dataset.</span>
-<span class="s2">&quot;&quot;&quot;</span>
-<span class="s2">import numpy as np</span>
-<span class="s2">import tensorflow as tf</span>
-
-<span class="s2">import autokeras as ak</span>
-
-
-<span class="s2">def imdb_raw():</span>
-<span class="s2">    max_features = 20000</span>
-<span class="s2">    index_offset = 3  # word index offset</span>
-
-<span class="s2">    (x_train, y_train), (x_test, y_test) = tf.keras.datasets.imdb.load_data(</span>
-<span class="s2">        num_words=max_features, index_from=index_offset</span>
-<span class="s2">    )</span>
-<span class="s2">    x_train = x_train</span>
-<span class="s2">    y_train = y_train.reshape(-1, 1)</span>
-<span class="s2">    x_test = x_test</span>
-<span class="s2">    y_test = y_test.reshape(-1, 1)</span>
-
-<span class="s2">    word_to_id = tf.keras.datasets.imdb.get_word_index()</span>
-<span class="s2">    word_to_id = {k: (v + index_offset) for k, v in word_to_id.items()}</span>
-<span class="s2">    word_to_id[&quot;&lt;PAD&gt;&quot;] = 0</span>
-<span class="s2">    word_to_id[&quot;&lt;START&gt;&quot;] = 1</span>
-<span class="s2">    word_to_id[&quot;&lt;UNK&gt;&quot;] = 2</span>
-
-<span class="s2">    id_to_word = {value: key for key, value in word_to_id.items()}</span>
-<span class="s2">    x_train = list(</span>
-<span class="s2">        map(lambda sentence: &quot; &quot;.join(id_to_word[i] for i in sentence), x_train)</span>
-<span class="s2">    )</span>
-<span class="s2">    x_test = list(</span>
-<span class="s2">        map(lambda sentence: &quot; &quot;.join(id_to_word[i] for i in sentence), x_test)</span>
-<span class="s2">    )</span>
-<span class="s2">    x_train = np.array(x_train, dtype=np.str)</span>
-<span class="s2">    x_test = np.array(x_test, dtype=np.str)</span>
-<span class="s2">    return (x_train, y_train), (x_test, y_test)</span>
-
-
-<span class="s2"># Prepare the data.</span>
-<span class="s2">(x_train, y_train), (x_test, y_test) = imdb_raw()</span>
-<span class="s2">print(x_train.shape)  # (25000,)</span>
-<span class="s2">print(y_train.shape)  # (25000, 1)</span>
-<span class="s2">print(x_train[0][:50])  # &lt;START&gt; this film was just brilliant casting &lt;UNK&gt;</span>
-
-<span class="s2"># Initialize the TextClassifier</span>
-<span class="s2">clf = ak.TextClassifier(max_trials=3)</span>
-<span class="s2"># Search for the best model.</span>
-<span class="s2">clf.fit(x_train, y_train, epochs=2, batch_size=8)</span>
-<span class="s2"># Evaluate on the testing data.</span>
-<span class="s2">print(&quot;Accuracy: </span><span class="si">{accuracy}</span><span class="s2">&quot;.format(accuracy=clf.evaluate(x_test, y_test)))</span>
-</code></pre></div>
+<h1 id="multi-modal-representation-learning">Multi-modal Representation Learning</h1>
+<p><strong>Python 3</strong>: Follow the TensorFlow install steps to install Python 3.</p>
+<p><strong>Pip</strong>: Follow the TensorFlow install steps to install Pip.</p>
+<p><strong>Tensorflow &gt;= 2.3.0</strong>: AutoKeras is based on TensorFlow.
+Please follow
+<a href="https://www.tensorflow.org/install/pip">this tutorial</a> to install TensorFlow for python3.</p>
+<p><strong>GPU Setup (Optional)</strong>:
+If you have GPUs on your machine and want to use them to accelerate the training,
+you can follow <a href="https://www.tensorflow.org/install/gpu">this tutorial</a> to setup.</p>
+<h2 id="install-autokeras">Install AutoKeras</h2>
+<p>AutoKeras only support <strong>Python 3</strong>.
+If you followed previous steps to use virtualenv to install tensorflow,
+you can just activate the virtualenv and use the following command to install AutoKeras. 
+<div class="highlight"><pre><span></span><code>pip install git+https://github.com/keras-team/keras-tuner.git
+pip install autokeras
+</code></pre></div></p>
+<p>If you did not use virtualenv, and you use <code>python3</code> command to execute your python program,
+please use the following command to install AutoKeras.
+<div class="highlight"><pre><span></span><code>python3 -m pip install git+https://github.com/keras-team/keras-tuner.git
+python3 -m pip install autokeras
+</code></pre></div></p>
 
               
             </article>
@@ -431,10 +433,10 @@
     <div class="md-dialog" data-md-component="dialog">
       <div class="md-dialog__inner md-typeset"></div>
     </div>
-    <script id="__config" type="application/json">{"base": "../..", "features": [], "translations": {"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing", "select.version.title": "Select version"}, "search": "../../assets/javascripts/workers/search.22074ed6.min.js"}</script>
+    <script id="__config" type="application/json">{"base": "..", "features": [], "translations": {"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing", "select.version.title": "Select version"}, "search": "../assets/javascripts/workers/search.22074ed6.min.js"}</script>
     
     
-      <script src="../../assets/javascripts/bundle.960e086b.min.js"></script>
+      <script src="../assets/javascripts/bundle.960e086b.min.js"></script>
       
         <script src="https://unpkg.com/mermaid@8.4.4/dist/mermaid.min.js"></script>
       
