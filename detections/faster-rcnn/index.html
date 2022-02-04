@@ -309,6 +309,60 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#rpn" class="md-nav__link">
+    RPN
+  </a>
+  
+    <nav class="md-nav" aria-label="RPN">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#anchor-template-generation" class="md-nav__link">
+    Anchor Template Generation
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#rpn-head" class="md-nav__link">
+    RPN Head
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#region-proposal-network" class="md-nav__link">
+    Region Proposal Network
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#roi-heads" class="md-nav__link">
+    ROI Heads
+  </a>
+  
+    <nav class="md-nav" aria-label="ROI Heads">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#assign-targets-to-proposals" class="md-nav__link">
+    Assign Targets to Proposals
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -461,6 +515,60 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#rpn" class="md-nav__link">
+    RPN
+  </a>
+  
+    <nav class="md-nav" aria-label="RPN">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#anchor-template-generation" class="md-nav__link">
+    Anchor Template Generation
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#rpn-head" class="md-nav__link">
+    RPN Head
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#region-proposal-network" class="md-nav__link">
+    Region Proposal Network
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#roi-heads" class="md-nav__link">
+    ROI Heads
+  </a>
+  
+    <nav class="md-nav" aria-label="ROI Heads">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#assign-targets-to-proposals" class="md-nav__link">
+    Assign Targets to Proposals
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -527,11 +635,7 @@
 
     <span class="nd">@torch</span><span class="o">.</span><span class="n">jit</span><span class="o">.</span><span class="n">unused</span>
     <span class="k">def</span> <span class="nf">eager_outputs</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">losses</span><span class="p">,</span> <span class="n">detections</span><span class="p">):</span>
-        <span class="c1"># type: (Dict[str, Tensor], List[Dict[str, Tensor]]) -&gt; Union[Dict[str, Tensor], List[Dict[str, Tensor]]]</span>
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">training</span><span class="p">:</span>
-            <span class="k">return</span> <span class="n">losses</span>
-
-        <span class="k">return</span> <span class="n">detections</span>
+        <span class="k">pass</span>
 
     <span class="k">def</span> <span class="nf">forward</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">images</span><span class="p">,</span> <span class="n">targets</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
         <span class="c1"># type: (List[Tensor], Optional[List[Dict[str, Tensor]]]) -&gt; Tuple[Dict[str, Tensor], List[Dict[str, Tensor]]]</span>
@@ -592,18 +696,217 @@
         <span class="n">losses</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">detector_losses</span><span class="p">)</span>
         <span class="n">losses</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">proposal_losses</span><span class="p">)</span>
 
-        <span class="k">if</span> <span class="n">torch</span><span class="o">.</span><span class="n">jit</span><span class="o">.</span><span class="n">is_scripting</span><span class="p">():</span>
-            <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">_has_warned</span><span class="p">:</span>
-                <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span><span class="s2">&quot;RCNN always returns a (Losses, Detections) tuple in scripting&quot;</span><span class="p">)</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">_has_warned</span> <span class="o">=</span> <span class="kc">True</span>
-            <span class="k">return</span> <span class="n">losses</span><span class="p">,</span> <span class="n">detections</span>
-        <span class="k">else</span><span class="p">:</span>
-            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">eager_outputs</span><span class="p">(</span><span class="n">losses</span><span class="p">,</span> <span class="n">detections</span><span class="p">)</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">training</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">losses</span>
+        <span class="k">return</span> <span class="n">detections</span>
+</code></pre></div>
+<h3 id="rpn">RPN</h3>
+<p>RPN module will first generate anchors and cls predictions, anchor offsets. The proposals will then be constructed based on 
+the offsets and anchor templates. After filtering, the proposals
+and targets will be used to compute RPN loss. </p>
+<h4 id="anchor-template-generation">Anchor Template Generation</h4>
+<div class="highlight"><pre><span></span><code><span class="c1"># 遍历每个预测特征层的grid_size，strides和cell_anchors</span>
+<span class="k">for</span> <span class="n">size</span><span class="p">,</span> <span class="n">stride</span><span class="p">,</span> <span class="n">base_anchors</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">grid_sizes</span><span class="p">,</span> <span class="n">strides</span><span class="p">,</span> <span class="n">cell_anchors</span><span class="p">):</span>
+    <span class="n">grid_height</span><span class="p">,</span> <span class="n">grid_width</span> <span class="o">=</span> <span class="n">size</span>
+    <span class="n">stride_height</span><span class="p">,</span> <span class="n">stride_width</span> <span class="o">=</span> <span class="n">stride</span>
+    <span class="n">device</span> <span class="o">=</span> <span class="n">base_anchors</span><span class="o">.</span><span class="n">device</span>
 
-        <span class="c1"># if self.training:</span>
-        <span class="c1">#     return losses</span>
-        <span class="c1">#</span>
-        <span class="c1"># return detections</span>
+    <span class="c1"># For output anchor, compute [x_center, y_center, x_center, y_center]</span>
+    <span class="c1"># shape: [grid_width] 对应原图上的x坐标(列)</span>
+    <span class="n">shifts_x</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">grid_width</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">torch</span><span class="o">.</span><span class="n">float32</span><span class="p">,</span> <span class="n">device</span><span class="o">=</span><span class="n">device</span><span class="p">)</span> <span class="o">*</span> <span class="n">stride_width</span>
+    <span class="c1"># shape: [grid_height] 对应原图上的y坐标(行)</span>
+    <span class="n">shifts_y</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">grid_height</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">torch</span><span class="o">.</span><span class="n">float32</span><span class="p">,</span> <span class="n">device</span><span class="o">=</span><span class="n">device</span><span class="p">)</span> <span class="o">*</span> <span class="n">stride_height</span>
+
+    <span class="c1"># 计算预测特征矩阵上每个点对应原图上的坐标(anchors模板的坐标偏移量)</span>
+    <span class="c1"># torch.meshgrid函数分别传入行坐标和列坐标，生成网格行坐标矩阵和网格列坐标矩阵</span>
+    <span class="c1"># shape: [grid_height, grid_width]</span>
+    <span class="n">shift_y</span><span class="p">,</span> <span class="n">shift_x</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">meshgrid</span><span class="p">(</span><span class="n">shifts_y</span><span class="p">,</span> <span class="n">shifts_x</span><span class="p">)</span>
+    <span class="n">shift_x</span> <span class="o">=</span> <span class="n">shift_x</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+    <span class="n">shift_y</span> <span class="o">=</span> <span class="n">shift_y</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+
+    <span class="c1"># 计算anchors坐标(xmin, ymin, xmax, ymax)在原图上的坐标偏移量</span>
+    <span class="c1"># shape: [grid_width*grid_height, 4]</span>
+    <span class="n">shifts</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">stack</span><span class="p">([</span><span class="n">shift_x</span><span class="p">,</span> <span class="n">shift_y</span><span class="p">,</span> <span class="n">shift_x</span><span class="p">,</span> <span class="n">shift_y</span><span class="p">],</span> <span class="n">dim</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+
+    <span class="c1"># For every (base anchor, output anchor) pair,</span>
+    <span class="c1"># offset each zero-centered base anchor by the center of the output anchor.</span>
+    <span class="c1"># 将anchors模板与原图上的坐标偏移量相加得到原图上所有anchors的坐标信息(shape不同时会使用广播机制)</span>
+    <span class="n">shifts_anchor</span> <span class="o">=</span> <span class="n">shifts</span><span class="o">.</span><span class="n">view</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span> <span class="o">+</span> <span class="n">base_anchors</span><span class="o">.</span><span class="n">view</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span>
+    <span class="n">anchors</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">shifts_anchor</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>
+</code></pre></div>
+<h4 id="rpn-head">RPN Head</h4>
+<p>RPNHead performs sliding-window scanning on the feature maps by using a 3x3 convolutional kernel. The output is cls_logits and
+box_pred, both of which are implemented with 1x1 convolution. </p>
+<h4 id="region-proposal-network">Region Proposal Network</h4>
+<p>This module is a wrapper that chains the following functions: </p>
+<ul>
+<li>assign_targets_to_anchors: find the matching gt for each anchor and categorize the anchors into positives/negatives, bacground and ignorables. </li>
+<li>filter_proposals: filter out boxes that are too small. Perform NMS, select post_nms_top_n based on probability. </li>
+<li>compute_loss: calculate rpn loss, including class loss, box regression loss. </li>
+<li>forward: chain up mentioned functions and return boxes, losses to the main entry file. </li>
+</ul>
+<div class="highlight"><pre><span></span><code>Arguments:
+        anchor_generator (AnchorGenerator): module that generates the anchors for a set of feature
+            maps.
+        head (nn.Module): module that computes the objectness and regression deltas
+        fg_iou_thresh (float): minimum IoU between the anchor and the GT box so that they can be
+            considered as positive during training of the RPN.
+        bg_iou_thresh (float): maximum IoU between the anchor and the GT box so that they can be
+            considered as negative during training of the RPN.
+        batch_size_per_image (int): number of anchors that are sampled during training of the RPN
+            for computing the loss
+        positive_fraction (float): proportion of positive anchors in a mini-batch during training
+            of the RPN
+        pre_nms_top_n (Dict[str]): number of proposals to keep before applying NMS. It should
+            contain two fields: training and testing, to allow for different values depending
+            on training or evaluation
+        post_nms_top_n (Dict[str]): number of proposals to keep after applying NMS. It should
+            contain two fields: training and testing, to allow for different values depending
+            on training or evaluation
+        nms_thresh (float): NMS threshold used for postprocessing the RPN proposals
+</code></pre></div>
+<blockquote>
+<p>How is matching performed for proposals?</p>
+</blockquote>
+<div class="highlight"><pre><span></span><code><span class="c1"># 遍历每张图像的anchors和targets</span>
+<span class="k">for</span> <span class="n">anchors_per_image</span><span class="p">,</span> <span class="n">targets_per_image</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">anchors</span><span class="p">,</span> <span class="n">targets</span><span class="p">):</span>
+    <span class="n">gt_boxes</span> <span class="o">=</span> <span class="n">targets_per_image</span><span class="p">[</span><span class="s2">&quot;boxes&quot;</span><span class="p">]</span>
+    <span class="k">if</span> <span class="n">gt_boxes</span><span class="o">.</span><span class="n">numel</span><span class="p">()</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="n">device</span> <span class="o">=</span> <span class="n">anchors_per_image</span><span class="o">.</span><span class="n">device</span>
+        <span class="n">matched_gt_boxes_per_image</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">anchors_per_image</span><span class="o">.</span><span class="n">shape</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">torch</span><span class="o">.</span><span class="n">float32</span><span class="p">,</span> <span class="n">device</span><span class="o">=</span><span class="n">device</span><span class="p">)</span>
+        <span class="n">labels_per_image</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">anchors_per_image</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">],),</span> <span class="n">dtype</span><span class="o">=</span><span class="n">torch</span><span class="o">.</span><span class="n">float32</span><span class="p">,</span> <span class="n">device</span><span class="o">=</span><span class="n">device</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="c1"># 计算anchors与真实bbox的iou信息</span>
+        <span class="c1"># set to self.box_similarity when https://github.com/pytorch/pytorch/issues/27495 lands</span>
+        <span class="n">match_quality_matrix</span> <span class="o">=</span> <span class="n">box_ops</span><span class="o">.</span><span class="n">box_iou</span><span class="p">(</span><span class="n">gt_boxes</span><span class="p">,</span> <span class="n">anchors_per_image</span><span class="p">)</span>
+        <span class="c1"># 计算每个anchors与gt匹配iou最大的索引（如果iou&lt;0.3索引置为-1，0.3&lt;iou&lt;0.7索引为-2）</span>
+        <span class="n">matched_idxs</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">proposal_matcher</span><span class="p">(</span><span class="n">match_quality_matrix</span><span class="p">)</span>
+        <span class="c1"># get the targets corresponding GT for each proposal</span>
+        <span class="c1"># NB: need to clamp the indices because we can have a single</span>
+        <span class="c1"># GT in the image, and matched_idxs can be -2, which goes</span>
+        <span class="c1"># out of bounds</span>
+        <span class="c1"># 这里使用clamp设置下限0是为了方便取每个anchors对应的gt_boxes信息</span>
+        <span class="c1"># 负样本和舍弃的样本都是负值，所以为了防止越界直接置为0</span>
+        <span class="c1"># 因为后面是通过labels_per_image变量来记录正样本位置的，</span>
+        <span class="c1"># 所以负样本和舍弃的样本对应的gt_boxes信息并没有什么意义，</span>
+        <span class="c1"># 反正计算目标边界框回归损失时只会用到正样本。</span>
+        <span class="n">matched_gt_boxes_per_image</span> <span class="o">=</span> <span class="n">gt_boxes</span><span class="p">[</span><span class="n">matched_idxs</span><span class="o">.</span><span class="n">clamp</span><span class="p">(</span><span class="nb">min</span><span class="o">=</span><span class="mi">0</span><span class="p">)]</span>
+
+        <span class="c1"># 记录所有anchors匹配后的标签(正样本处标记为1，负样本处标记为0，丢弃样本处标记为-2)</span>
+        <span class="n">labels_per_image</span> <span class="o">=</span> <span class="n">matched_idxs</span> <span class="o">&gt;=</span> <span class="mi">0</span>
+        <span class="n">labels_per_image</span> <span class="o">=</span> <span class="n">labels_per_image</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">dtype</span><span class="o">=</span><span class="n">torch</span><span class="o">.</span><span class="n">float32</span><span class="p">)</span>
+
+        <span class="c1"># background (negative examples)</span>
+        <span class="n">bg_indices</span> <span class="o">=</span> <span class="n">matched_idxs</span> <span class="o">==</span> <span class="bp">self</span><span class="o">.</span><span class="n">proposal_matcher</span><span class="o">.</span><span class="n">BELOW_LOW_THRESHOLD</span>  <span class="c1"># -1</span>
+        <span class="n">labels_per_image</span><span class="p">[</span><span class="n">bg_indices</span><span class="p">]</span> <span class="o">=</span> <span class="mf">0.0</span>
+
+        <span class="c1"># discard indices that are between thresholds</span>
+        <span class="n">inds_to_discard</span> <span class="o">=</span> <span class="n">matched_idxs</span> <span class="o">==</span> <span class="bp">self</span><span class="o">.</span><span class="n">proposal_matcher</span><span class="o">.</span><span class="n">BETWEEN_THRESHOLDS</span>  <span class="c1"># -2</span>
+        <span class="n">labels_per_image</span><span class="p">[</span><span class="n">inds_to_discard</span><span class="p">]</span> <span class="o">=</span> <span class="o">-</span><span class="mf">1.0</span>
+
+    <span class="n">labels</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">labels_per_image</span><span class="p">)</span>
+    <span class="n">matched_gt_boxes</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">matched_gt_boxes_per_image</span><span class="p">)</span>
+</code></pre></div>
+<blockquote>
+<p>How is the loss computed for RPN?</p>
+</blockquote>
+<div class="highlight"><pre><span></span><code><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">计算RPN损失，包括类别损失（前景与背景），bbox regression损失</span>
+<span class="sd">Arguments:</span>
+<span class="sd">    objectness (Tensor)：预测的前景概率</span>
+<span class="sd">    pred_bbox_deltas (Tensor)：预测的bbox regression</span>
+<span class="sd">    labels (List[Tensor])：真实的标签 1, 0, -1（batch中每一张图片的labels对应List的一个元素中）</span>
+<span class="sd">    regression_targets (List[Tensor])：真实的bbox regression</span>
+
+<span class="sd">Returns:</span>
+<span class="sd">    objectness_loss (Tensor) : 类别损失</span>
+<span class="sd">    box_loss (Tensor)：边界框回归损失</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="c1"># 按照给定的batch_size_per_image, positive_fraction选择正负样本</span>
+<span class="n">sampled_pos_inds</span><span class="p">,</span> <span class="n">sampled_neg_inds</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">fg_bg_sampler</span><span class="p">(</span><span class="n">labels</span><span class="p">)</span>
+<span class="c1"># 将一个batch中的所有正负样本List(Tensor)分别拼接在一起，并获取非零位置的索引</span>
+<span class="c1"># sampled_pos_inds = torch.nonzero(torch.cat(sampled_pos_inds, dim=0)).squeeze(1)</span>
+<span class="n">sampled_pos_inds</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">torch</span><span class="o">.</span><span class="n">cat</span><span class="p">(</span><span class="n">sampled_pos_inds</span><span class="p">,</span> <span class="n">dim</span><span class="o">=</span><span class="mi">0</span><span class="p">))[</span><span class="mi">0</span><span class="p">]</span>
+<span class="c1"># sampled_neg_inds = torch.nonzero(torch.cat(sampled_neg_inds, dim=0)).squeeze(1)</span>
+<span class="n">sampled_neg_inds</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">torch</span><span class="o">.</span><span class="n">cat</span><span class="p">(</span><span class="n">sampled_neg_inds</span><span class="p">,</span> <span class="n">dim</span><span class="o">=</span><span class="mi">0</span><span class="p">))[</span><span class="mi">0</span><span class="p">]</span>
+
+<span class="c1"># 将所有正负样本索引拼接在一起</span>
+<span class="n">sampled_inds</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">cat</span><span class="p">([</span><span class="n">sampled_pos_inds</span><span class="p">,</span> <span class="n">sampled_neg_inds</span><span class="p">],</span> <span class="n">dim</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">objectness</span> <span class="o">=</span> <span class="n">objectness</span><span class="o">.</span><span class="n">flatten</span><span class="p">()</span>
+
+<span class="n">labels</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">cat</span><span class="p">(</span><span class="n">labels</span><span class="p">,</span> <span class="n">dim</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">regression_targets</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">cat</span><span class="p">(</span><span class="n">regression_targets</span><span class="p">,</span> <span class="n">dim</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+
+<span class="c1"># 计算边界框回归损失</span>
+<span class="n">box_loss</span> <span class="o">=</span> <span class="n">det_utils</span><span class="o">.</span><span class="n">smooth_l1_loss</span><span class="p">(</span>
+    <span class="n">pred_bbox_deltas</span><span class="p">[</span><span class="n">sampled_pos_inds</span><span class="p">],</span>
+    <span class="n">regression_targets</span><span class="p">[</span><span class="n">sampled_pos_inds</span><span class="p">],</span>
+    <span class="n">beta</span><span class="o">=</span><span class="mi">1</span> <span class="o">/</span> <span class="mi">9</span><span class="p">,</span>
+    <span class="n">size_average</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="n">sampled_inds</span><span class="o">.</span><span class="n">numel</span><span class="p">())</span>
+
+<span class="c1"># 计算目标预测概率损失</span>
+<span class="n">objectness_loss</span> <span class="o">=</span> <span class="n">F</span><span class="o">.</span><span class="n">binary_cross_entropy_with_logits</span><span class="p">(</span>
+    <span class="n">objectness</span><span class="p">[</span><span class="n">sampled_inds</span><span class="p">],</span> <span class="n">labels</span><span class="p">[</span><span class="n">sampled_inds</span><span class="p">]</span>
+<span class="p">)</span>
+</code></pre></div>
+<h3 id="roi-heads">ROI Heads</h3>
+<p>ROI head has certain overlapping functions with RPN heads, as two-stage indicates. Instead of generating offsets for the anchor templates, the ROI head refines the proposal from the last stage by predicting class labels and offsets. The supervision signals come from matching targets to proposals. </p>
+<h4 id="assign-targets-to-proposals">Assign Targets to Proposals</h4>
+<blockquote>
+<p>Prepare supervisions for roi heads ?</p>
+</blockquote>
+<div class="highlight"><pre><span></span><code> <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">为每个proposal匹配对应的gt_box，并划分到正负样本中</span>
+<span class="sd">Args:</span>
+<span class="sd">    proposals:</span>
+<span class="sd">    gt_boxes:</span>
+<span class="sd">    gt_labels:</span>
+
+<span class="sd">Returns:</span>
+
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="n">matched_idxs</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="n">labels</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="c1"># 遍历每张图像的proposals, gt_boxes, gt_labels信息</span>
+<span class="k">for</span> <span class="n">proposals_in_image</span><span class="p">,</span> <span class="n">gt_boxes_in_image</span><span class="p">,</span> <span class="n">gt_labels_in_image</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">proposals</span><span class="p">,</span> <span class="n">gt_boxes</span><span class="p">,</span> <span class="n">gt_labels</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">gt_boxes_in_image</span><span class="o">.</span><span class="n">numel</span><span class="p">()</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>  <span class="c1"># 该张图像中没有gt框，为背景</span>
+        <span class="c1"># background image</span>
+        <span class="n">device</span> <span class="o">=</span> <span class="n">proposals_in_image</span><span class="o">.</span><span class="n">device</span>
+        <span class="n">clamped_matched_idxs_in_image</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span>
+            <span class="p">(</span><span class="n">proposals_in_image</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">],),</span> <span class="n">dtype</span><span class="o">=</span><span class="n">torch</span><span class="o">.</span><span class="n">int64</span><span class="p">,</span> <span class="n">device</span><span class="o">=</span><span class="n">device</span>
+        <span class="p">)</span>
+        <span class="n">labels_in_image</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span>
+            <span class="p">(</span><span class="n">proposals_in_image</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">],),</span> <span class="n">dtype</span><span class="o">=</span><span class="n">torch</span><span class="o">.</span><span class="n">int64</span><span class="p">,</span> <span class="n">device</span><span class="o">=</span><span class="n">device</span>
+        <span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="c1">#  set to self.box_similarity when https://github.com/pytorch/pytorch/issues/27495 lands</span>
+        <span class="c1"># 计算proposal与每个gt_box的iou重合度</span>
+        <span class="n">match_quality_matrix</span> <span class="o">=</span> <span class="n">box_ops</span><span class="o">.</span><span class="n">box_iou</span><span class="p">(</span><span class="n">gt_boxes_in_image</span><span class="p">,</span> <span class="n">proposals_in_image</span><span class="p">)</span>
+
+        <span class="c1"># 计算proposal与每个gt_box匹配的iou最大值，并记录索引，</span>
+        <span class="c1"># iou &lt; low_threshold索引值为 -1， low_threshold &lt;= iou &lt; high_threshold索引值为 -2</span>
+        <span class="n">matched_idxs_in_image</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">proposal_matcher</span><span class="p">(</span><span class="n">match_quality_matrix</span><span class="p">)</span>
+
+        <span class="c1"># 限制最小值，防止匹配标签时出现越界的情况</span>
+        <span class="c1"># 注意-1, -2对应的gt索引会调整到0,获取的标签类别为第0个gt的类别（实际上并不是）,后续会进一步处理</span>
+        <span class="n">clamped_matched_idxs_in_image</span> <span class="o">=</span> <span class="n">matched_idxs_in_image</span><span class="o">.</span><span class="n">clamp</span><span class="p">(</span><span class="nb">min</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+        <span class="c1"># 获取proposal匹配到的gt对应标签</span>
+        <span class="n">labels_in_image</span> <span class="o">=</span> <span class="n">gt_labels_in_image</span><span class="p">[</span><span class="n">clamped_matched_idxs_in_image</span><span class="p">]</span>
+        <span class="n">labels_in_image</span> <span class="o">=</span> <span class="n">labels_in_image</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">dtype</span><span class="o">=</span><span class="n">torch</span><span class="o">.</span><span class="n">int64</span><span class="p">)</span>
+
+        <span class="c1"># label background (below the low threshold)</span>
+        <span class="c1"># 将gt索引为-1的类别设置为0，即背景，负样本</span>
+        <span class="n">bg_inds</span> <span class="o">=</span> <span class="n">matched_idxs_in_image</span> <span class="o">==</span> <span class="bp">self</span><span class="o">.</span><span class="n">proposal_matcher</span><span class="o">.</span><span class="n">BELOW_LOW_THRESHOLD</span>  <span class="c1"># -1</span>
+        <span class="n">labels_in_image</span><span class="p">[</span><span class="n">bg_inds</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
+
+        <span class="c1"># label ignore proposals (between low and high threshold)</span>
+        <span class="c1"># 将gt索引为-2的类别设置为-1, 即废弃样本</span>
+        <span class="n">ignore_inds</span> <span class="o">=</span> <span class="n">matched_idxs_in_image</span> <span class="o">==</span> <span class="bp">self</span><span class="o">.</span><span class="n">proposal_matcher</span><span class="o">.</span><span class="n">BETWEEN_THRESHOLDS</span>  <span class="c1"># -2</span>
+        <span class="n">labels_in_image</span><span class="p">[</span><span class="n">ignore_inds</span><span class="p">]</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span>  <span class="c1"># -1 is ignored by sampler</span>
+
+    <span class="n">matched_idxs</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">clamped_matched_idxs_in_image</span><span class="p">)</span>
+    <span class="n">labels</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">labels_in_image</span><span class="p">)</span>
 </code></pre></div>
 
               
