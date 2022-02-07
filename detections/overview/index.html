@@ -63,6 +63,11 @@
     <label class="md-overlay" for="__drawer"></label>
     <div data-md-component="skip">
       
+        
+        <a href="#overview-of-object-detection" class="md-skip">
+          Skip to content
+        </a>
+      
     </div>
     <div data-md-component="announce">
       
@@ -264,10 +269,77 @@
       <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
       
       
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          Overview
+          <span class="md-nav__icon md-icon"></span>
+        </label>
       
       <a href="./" class="md-nav__link md-nav__link--active">
         Overview
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#categorization" class="md-nav__link">
+    Categorization
+  </a>
+  
+    <nav class="md-nav" aria-label="Categorization">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#anchor-based-vs-anchor-free" class="md-nav__link">
+    Anchor-based vs Anchor-free
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#nms-free" class="md-nav__link">
+    NMS-free
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#open-vocabulary" class="md-nav__link">
+    Open Vocabulary
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#reference" class="md-nav__link">
+    Reference
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
       
     </li>
   
@@ -377,15 +449,159 @@
               </div>
             
             
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#categorization" class="md-nav__link">
+    Categorization
+  </a>
+  
+    <nav class="md-nav" aria-label="Categorization">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#anchor-based-vs-anchor-free" class="md-nav__link">
+    Anchor-based vs Anchor-free
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#nms-free" class="md-nav__link">
+    NMS-free
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#open-vocabulary" class="md-nav__link">
+    Open Vocabulary
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#reference" class="md-nav__link">
+    Reference
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
           
           <div class="md-content" data-md-component="content">
             <article class="md-content__inner md-typeset">
               
                 
 
-  <h1>Overview</h1>
-
-
+<h1 id="overview-of-object-detection">Overview of Object Detection</h1>
+<h2 id="categorization">Categorization</h2>
+<h3 id="anchor-based-vs-anchor-free">Anchor-based vs Anchor-free</h3>
+<p>Representative anchor-based methods include Faster-RCNN, SSD, Yolo-v2/v3. Representative anchor-free methods include CornerNet (top-left/bottom-right), ExtremeNet (four keypoints + center point), CenterNet, FCOS (center + 2 distance to bbox). Methods that combine anchor-based branch and anchor-free branch include FSAF, SFace, GA-RPN. </p>
+<p>Yolo has a few variants. Yolo-v1 can be seen as anchor-free. Anchor is introduced since v2. </p>
+<blockquote>
+<p>Anchor &amp; FPN-based pipeline consists of four main components: </p>
+</blockquote>
+<ul>
+<li>Assignment: between anchor and feature map. Feature map with large perceptive field correspond to large anchors and vice versa. 
+<img alt="assignment" src="../img/assignment.png" /></li>
+<li>Groundtruth: for each gt, find anchor with largest IOU as positives. For the rest anchors, those with IOU larger than the threshold are positives and vice versa. </li>
+<li>Output &amp; loss: network output and loss design. For each feature map in the pyramid, the output is WxHxKA (K=# of classes) and WxHx4A (A=# of anchors). </li>
+<li>Prediction: sort predictions based on scores, and regress those with high scores. The final predicion is post-nms results. </li>
+</ul>
+<p>Limitations of anchor-based methods: </p>
+<ul>
+<li>The essence of anchor is object candidates. Due to the variance of object shape and location, the number of anchors is large, otherwise objects may be missed. DSSD has 40K anchors, RetinaNet has 100K anchors. This will likely cause imbalance between positives/negatives. </li>
+<li>Hyperparameters such as anchor number, scale, aspect ratio are hand-crafted. </li>
+</ul>
+<blockquote>
+<p>Anchor-free methods: </p>
+</blockquote>
+<p>Take CornerNet as an example, the idea is to predict a pair of keypoints, top-left/bottom-right and generate their heatmaps as well as their connections (embeddings, offsets). The pairing loss enforces that embeddings for the keypoint pairs belonging to the same object to be close and vice versa. </p>
+<p><img alt="FSAF" src="../img/FSAF.png" /></p>
+<ul>
+<li>Assignment: FSAF uses online feature selection, allowing each instance to select the feature map level. FCOS regulates the scale of instance to be predicted for each feature map level. FSAF/FCOS assigns an instance to a single feature map whereas FoveaBox can assign an instance to multiple levels. </li>
+<li>Groundtruth: for each gt, it's first projected to feature pyramid, defined as projected box. Then it will be used to generate effective box with some hyper-parameters. FCOS uses a centerness branch to predict the centerness of each pixel in the feature map, with respect to gt box center. 
+<img alt="FCOS" src="../img/FCOS.png" /></li>
+<li>Output &amp; Loss: Each feature map in the pyramid predicts WxHxK classification scores and WxHx4 regression offsets.</li>
+<li>Prediction. </li>
+</ul>
+<p>Advantages of anchor-free: More positive samples. </p>
+<p>Limitations: performance gap compared to two-stage detectors. </p>
+<p>In anchor-based methods, bboxes are regressed based on anchors; each point in the feature map may correspond to multiple objects. In anchor-free (anchor-prio-free) methods, each point serves one object. </p>
+<h3 id="nms-free">NMS-free</h3>
+<p>NMS is used for post-processing in object detection. The idea is: first sort bboxes based on their scores (decreasing order), then compare the first one against the rest, remove those with IOU greater than certain threshold. Then use the next bbox as reference and repeat. The algorithm stops when there's no bbox in the list. </p>
+<div class="highlight"><pre><span></span><code><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="k">def</span> <span class="nf">nms</span><span class="p">(</span><span class="n">dets</span><span class="p">,</span> <span class="n">thresh</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Pure Python NMS baseline.&quot;&quot;&quot;</span>
+    <span class="n">x1</span> <span class="o">=</span> <span class="n">dets</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">]</span>
+    <span class="n">y1</span> <span class="o">=</span> <span class="n">dets</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">]</span>
+    <span class="n">x2</span> <span class="o">=</span> <span class="n">dets</span><span class="p">[:,</span> <span class="mi">2</span><span class="p">]</span>
+    <span class="n">y2</span> <span class="o">=</span> <span class="n">dets</span><span class="p">[:,</span> <span class="mi">3</span><span class="p">]</span>
+    <span class="n">scores</span> <span class="o">=</span> <span class="n">dets</span><span class="p">[:,</span> <span class="mi">4</span><span class="p">]</span>
+    <span class="n">areas</span> <span class="o">=</span> <span class="p">(</span><span class="n">x2</span> <span class="o">-</span> <span class="n">x1</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="n">y2</span> <span class="o">-</span> <span class="n">y1</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+    <span class="n">order</span> <span class="o">=</span> <span class="n">scores</span><span class="o">.</span><span class="n">argsort</span><span class="p">()[::</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+    <span class="n">keep</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">while</span> <span class="n">order</span><span class="o">.</span><span class="n">size</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="n">i</span> <span class="o">=</span> <span class="n">order</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="n">keep</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+        <span class="n">xx1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">maximum</span><span class="p">(</span><span class="n">x1</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">x1</span><span class="p">[</span><span class="n">order</span><span class="p">[</span><span class="mi">1</span><span class="p">:]])</span>
+        <span class="n">yy1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">maximum</span><span class="p">(</span><span class="n">y1</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">y1</span><span class="p">[</span><span class="n">order</span><span class="p">[</span><span class="mi">1</span><span class="p">:]])</span>
+        <span class="n">xx2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">minimum</span><span class="p">(</span><span class="n">x2</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">x2</span><span class="p">[</span><span class="n">order</span><span class="p">[</span><span class="mi">1</span><span class="p">:]])</span>
+        <span class="n">yy2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">minimum</span><span class="p">(</span><span class="n">y2</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">y2</span><span class="p">[</span><span class="n">order</span><span class="p">[</span><span class="mi">1</span><span class="p">:]]</span><span class="err">）</span>
+        <span class="n">w</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">maximum</span><span class="p">(</span><span class="mf">0.0</span><span class="p">,</span> <span class="n">xx2</span> <span class="o">-</span> <span class="n">xx1</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+        <span class="n">h</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">maximum</span><span class="p">(</span><span class="mf">0.0</span><span class="p">,</span> <span class="n">yy2</span> <span class="o">-</span> <span class="n">yy1</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+        <span class="n">inter</span> <span class="o">=</span> <span class="n">w</span> <span class="o">*</span> <span class="n">h</span>
+        <span class="n">ovr</span> <span class="o">=</span> <span class="n">inter</span> <span class="o">/</span> <span class="p">(</span><span class="n">areas</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">+</span> <span class="n">areas</span><span class="p">[</span><span class="n">order</span><span class="p">[</span><span class="mi">1</span><span class="p">:]]</span> <span class="o">-</span> <span class="n">inter</span><span class="p">)</span>
+        <span class="n">inds</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">ovr</span> <span class="o">&lt;=</span> <span class="n">thresh</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="n">order</span> <span class="o">=</span> <span class="n">order</span><span class="p">[</span><span class="n">inds</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]</span>
+    <span class="k">return</span> <span class="n">keep</span>
+</code></pre></div>
+<p>The reason for NMS-free methods is to deal with cases where overlapping objects are a lot. 
+<img alt="nms-why" src="../img/nms-why.png" /></p>
+<p>Some methods include: </p>
+<ul>
+<li>Detection in Crowded Scenes: One Proposal, Multiple Predictions
+<img alt="nms-method1" src="../img/nms-method1.png" />
+<img alt="emd-loss" src="../img/EMD-loss.png" /></li>
+<li>End-to-end people detection in crowded scenes (CVPR 16): Uses LSTM and proposes hungarian loss for matching with gt, which has been the standardized way for label assignment now. </li>
+<li>Relation Networks for Object Detection (CVPR 18): uses self-attention to compute f_A (appearance feature), f_G (geometric feature), f_R(n) (relation feature of the whole object with respect to the nth object). The paper also proposes end-to-end Duplicate removal network (DRN) module to replace NMS.  </li>
+<li>End-to-End Object Detection with Transformers (DETR ECCV 2020): uses transformer and sets detection number to be 100. Use hungarian loss for matching. </li>
+<li>Pix2seq: A Language Modeling Framework for Object Detection</li>
+<li>End-to-End Object Detection with Fully Convolutional Network (CVPR 21, DeFCN): many-to-one (one gt can match many proposals) is why NMS is necessary. Only one-to-one matching can get rid of NMS.</li>
+</ul>
+<h3 id="open-vocabulary">Open Vocabulary</h3>
+<h2 id="reference">Reference</h2>
+<p><a href="https://zhuanlan.zhihu.com/p/94924987">Anchor-based vs anchor-free</a>,
+<a href="https://zhuanlan.zhihu.com/p/453773468">NMS-free</a></p>
 
               
             </article>
