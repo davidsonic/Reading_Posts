@@ -10,14 +10,14 @@
       
       
       
-        <link rel="canonical" href="https://davidsonic.github.io/Reading_Posts/tutorial/overview/">
+        <link rel="canonical" href="https://davidsonic.github.io/Reading_Posts/video/avslow-fast/">
       
       <link rel="icon" href="../../img/favicon.png">
       <meta name="generator" content="mkdocs-1.2.3, mkdocs-material-8.1.9">
     
     
       
-        <title>AutoKeras 1.0 Tutorial - Reading Posts</title>
+        <title>Avslow fast - Reading Posts</title>
       
     
     
@@ -63,11 +63,6 @@
     <label class="md-overlay" for="__drawer"></label>
     <div data-md-component="skip">
       
-        
-        <a href="#autokeras-10-tutorial" class="md-skip">
-          Skip to content
-        </a>
-      
     </div>
     <div data-md-component="announce">
       
@@ -96,7 +91,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              AutoKeras 1.0 Tutorial
+              Avslow fast
             
           </span>
         </div>
@@ -433,7 +428,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../video/overview/" class="md-nav__link">
+      <a href="../overview/" class="md-nav__link">
         Overview
       </a>
     </li>
@@ -454,116 +449,15 @@
               </div>
             
             
-              
-              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
-                <div class="md-sidebar__scrollwrap">
-                  <div class="md-sidebar__inner">
-                    
-
-<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
-  
-  
-  
-    
-  
-  
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      Table of contents
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#supported-tasks" class="md-nav__link">
-    Supported Tasks
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#multi-task-and-multi-modal-data" class="md-nav__link">
-    Multi-Task and Multi-Modal Data
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#customized-model" class="md-nav__link">
-    Customized Model
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#export-model" class="md-nav__link">
-    Export Model
-  </a>
-  
-</li>
-      
-    </ul>
-  
-</nav>
-                  </div>
-                </div>
-              </div>
-            
           
           <div class="md-content" data-md-component="content">
             <article class="md-content__inner md-typeset">
               
                 
 
-<h1 id="autokeras-10-tutorial">AutoKeras 1.0 Tutorial</h1>
-<h2 id="supported-tasks">Supported Tasks</h2>
-<p>AutoKeras supports several tasks with extremely simple interface.
-You can click the links below to see the detailed tutorial for each task.</p>
-<p><strong>Suported Tasks</strong>:</p>
-<p><a href="/tutorial/image_classification">Image Classification</a></p>
-<p><a href="/tutorial/image_regression">Image Regression</a></p>
-<p><a href="/tutorial/text_classification">Text Classification</a></p>
-<p><a href="/tutorial/text_regression">Text Regression</a></p>
-<p><a href="/tutorial/structured_data_classification">Structured Data Classification</a></p>
-<p><a href="/tutorial/structured_data_regression">Structured Data Regression</a></p>
-<p><strong>Coming Soon</strong>: Time Series Forcasting, Object Detection, Image Segmentation.</p>
-<h2 id="multi-task-and-multi-modal-data">Multi-Task and Multi-Modal Data</h2>
-<p>If you are dealing with multi-task or multi-modal dataset, you can refer to this
-<a href="/tutorial/multi">tutorial</a> for details.</p>
-<h2 id="customized-model">Customized Model</h2>
-<p>Follow this <a href="/tutorial/customized">tutorial</a>, to use AutoKeras building blocks to quickly construct your own
-model.
-With these blocks, you only need to specify the high-level architecture of your
-model.
-AutoKeras would search for the best detailed configuration for you.
-Moreover, you can override the base classes to create your own block.
-The following are the links to the documentation of the predefined input nodes and blocks in AutoKeras.</p>
-<p><strong>Nodes</strong>:</p>
-<p><a href="/node/#imageinput-class">ImageInput</a></p>
-<p><a href="/node/#input-class">Input</a></p>
-<p><a href="/node/#structureddatainput-class">StructuredDataInput</a></p>
-<p><a href="/node/#textinput-class">TextInput</a></p>
-<p><strong>Blocks</strong>:</p>
-<p><a href="/block/#imageaugmentation-class">ImageAugmentation</a></p>
-<p><a href="/block/#normalization-class">Normalization</a></p>
-<p><a href="/block/#texttointsequence-class">TextToIntSequence</a></p>
-<p><a href="/block/#texttongramvector-class">TextToNgramVector</a></p>
-<p><a href="/block/#categoricaltonumerical-class">CategoricalToNumerical</a></p>
-<p><a href="/block/#convblock-class">ConvBlock</a></p>
-<p><a href="/block/#denseblock-class">DenseBlock</a></p>
-<p><a href="/block/#embedding-class">Embedding</a></p>
-<p><a href="/block/#merge-class">Merge</a></p>
-<p><a href="/block/#resnetblock-class">ResNetBlock</a></p>
-<p><a href="/block/#rnnblock-class">RNNBlock</a></p>
-<p><a href="/block/#spatialreduction-class">SpatialReduction</a></p>
-<p><a href="/block/#temporalreduction-class">TemporalReduction</a></p>
-<p><a href="/block/#xceptionblock-class">XceptionBlock</a></p>
-<p><a href="/block/#imageblock-class">ImageBlock</a></p>
-<p><a href="/block/#structureddatablock-class">StructuredDataBlock</a></p>
-<p><a href="/block/#textblock-class">TextBlock</a></p>
-<p><a href="/block/#classificationhead-class">ClassificationHead</a></p>
-<p><a href="/block/#regressionhead-class">RegressionHead</a></p>
-<h2 id="export-model">Export Model</h2>
-<p>You can follow this <a href="/tutorial/export">tutorial</a> to export the best model.</p>
+  <h1>Avslow fast</h1>
+
+
 
               
             </article>

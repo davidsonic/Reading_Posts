@@ -10,14 +10,14 @@
       
       
       
-        <link rel="canonical" href="https://davidsonic.github.io/Reading_Posts/tutorial/overview/">
+        <link rel="canonical" href="https://davidsonic.github.io/Reading_Posts/video/overview/">
       
       <link rel="icon" href="../../img/favicon.png">
       <meta name="generator" content="mkdocs-1.2.3, mkdocs-material-8.1.9">
     
     
       
-        <title>AutoKeras 1.0 Tutorial - Reading Posts</title>
+        <title>Overview - Reading Posts</title>
       
     
     
@@ -64,7 +64,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#autokeras-10-tutorial" class="md-skip">
+        <a href="#overview-of-object-detection" class="md-skip">
           Skip to content
         </a>
       
@@ -96,7 +96,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              AutoKeras 1.0 Tutorial
+              Overview
             
           </span>
         </div>
@@ -405,12 +405,14 @@
 
   
   
+    
+  
   
     
-    <li class="md-nav__item md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
       
       
-        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_6" type="checkbox" id="__nav_6" >
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_6" type="checkbox" id="__nav_6" checked>
       
       
       
@@ -431,11 +433,93 @@
               
   
   
+    
   
-    <li class="md-nav__item">
-      <a href="../../video/overview/" class="md-nav__link">
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          Overview
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
         Overview
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#categorization" class="md-nav__link">
+    Categorization
+  </a>
+  
+    <nav class="md-nav" aria-label="Categorization">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#audiovisual-slowfast-networks-for-video-recognition" class="md-nav__link">
+    Audiovisual SlowFast Networks for Video Recognition
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#x3d-expanding-architectures-for-efficient-video-recognition" class="md-nav__link">
+    X3D: Expanding Architectures for Efficient Video Recognition
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#multiscale-vision-transformers" class="md-nav__link">
+    Multiscale Vision Transformers
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#keeping-your-eye-on-the-ball-trajectory-attention-in-video-transformers" class="md-nav__link">
+    Keeping your eye on the ball: Trajectory attention in video transformers
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#reference" class="md-nav__link">
+    Reference
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
     </li>
   
 
@@ -474,29 +558,49 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#supported-tasks" class="md-nav__link">
-    Supported Tasks
+  <a href="#categorization" class="md-nav__link">
+    Categorization
   </a>
+  
+    <nav class="md-nav" aria-label="Categorization">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#audiovisual-slowfast-networks-for-video-recognition" class="md-nav__link">
+    Audiovisual SlowFast Networks for Video Recognition
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#x3d-expanding-architectures-for-efficient-video-recognition" class="md-nav__link">
+    X3D: Expanding Architectures for Efficient Video Recognition
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#multiscale-vision-transformers" class="md-nav__link">
+    Multiscale Vision Transformers
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#keeping-your-eye-on-the-ball-trajectory-attention-in-video-transformers" class="md-nav__link">
+    Keeping your eye on the ball: Trajectory attention in video transformers
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#multi-task-and-multi-modal-data" class="md-nav__link">
-    Multi-Task and Multi-Modal Data
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#customized-model" class="md-nav__link">
-    Customized Model
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#export-model" class="md-nav__link">
-    Export Model
+  <a href="#reference" class="md-nav__link">
+    Reference
   </a>
   
 </li>
@@ -514,56 +618,32 @@
               
                 
 
-<h1 id="autokeras-10-tutorial">AutoKeras 1.0 Tutorial</h1>
-<h2 id="supported-tasks">Supported Tasks</h2>
-<p>AutoKeras supports several tasks with extremely simple interface.
-You can click the links below to see the detailed tutorial for each task.</p>
-<p><strong>Suported Tasks</strong>:</p>
-<p><a href="/tutorial/image_classification">Image Classification</a></p>
-<p><a href="/tutorial/image_regression">Image Regression</a></p>
-<p><a href="/tutorial/text_classification">Text Classification</a></p>
-<p><a href="/tutorial/text_regression">Text Regression</a></p>
-<p><a href="/tutorial/structured_data_classification">Structured Data Classification</a></p>
-<p><a href="/tutorial/structured_data_regression">Structured Data Regression</a></p>
-<p><strong>Coming Soon</strong>: Time Series Forcasting, Object Detection, Image Segmentation.</p>
-<h2 id="multi-task-and-multi-modal-data">Multi-Task and Multi-Modal Data</h2>
-<p>If you are dealing with multi-task or multi-modal dataset, you can refer to this
-<a href="/tutorial/multi">tutorial</a> for details.</p>
-<h2 id="customized-model">Customized Model</h2>
-<p>Follow this <a href="/tutorial/customized">tutorial</a>, to use AutoKeras building blocks to quickly construct your own
-model.
-With these blocks, you only need to specify the high-level architecture of your
-model.
-AutoKeras would search for the best detailed configuration for you.
-Moreover, you can override the base classes to create your own block.
-The following are the links to the documentation of the predefined input nodes and blocks in AutoKeras.</p>
-<p><strong>Nodes</strong>:</p>
-<p><a href="/node/#imageinput-class">ImageInput</a></p>
-<p><a href="/node/#input-class">Input</a></p>
-<p><a href="/node/#structureddatainput-class">StructuredDataInput</a></p>
-<p><a href="/node/#textinput-class">TextInput</a></p>
-<p><strong>Blocks</strong>:</p>
-<p><a href="/block/#imageaugmentation-class">ImageAugmentation</a></p>
-<p><a href="/block/#normalization-class">Normalization</a></p>
-<p><a href="/block/#texttointsequence-class">TextToIntSequence</a></p>
-<p><a href="/block/#texttongramvector-class">TextToNgramVector</a></p>
-<p><a href="/block/#categoricaltonumerical-class">CategoricalToNumerical</a></p>
-<p><a href="/block/#convblock-class">ConvBlock</a></p>
-<p><a href="/block/#denseblock-class">DenseBlock</a></p>
-<p><a href="/block/#embedding-class">Embedding</a></p>
-<p><a href="/block/#merge-class">Merge</a></p>
-<p><a href="/block/#resnetblock-class">ResNetBlock</a></p>
-<p><a href="/block/#rnnblock-class">RNNBlock</a></p>
-<p><a href="/block/#spatialreduction-class">SpatialReduction</a></p>
-<p><a href="/block/#temporalreduction-class">TemporalReduction</a></p>
-<p><a href="/block/#xceptionblock-class">XceptionBlock</a></p>
-<p><a href="/block/#imageblock-class">ImageBlock</a></p>
-<p><a href="/block/#structureddatablock-class">StructuredDataBlock</a></p>
-<p><a href="/block/#textblock-class">TextBlock</a></p>
-<p><a href="/block/#classificationhead-class">ClassificationHead</a></p>
-<p><a href="/block/#regressionhead-class">RegressionHead</a></p>
-<h2 id="export-model">Export Model</h2>
-<p>You can follow this <a href="/tutorial/export">tutorial</a> to export the best model.</p>
+<h1 id="overview-of-object-detection">Overview of Object Detection</h1>
+<h2 id="categorization">Categorization</h2>
+<h3 id="audiovisual-slowfast-networks-for-video-recognition">Audiovisual SlowFast Networks for Video Recognition</h3>
+<p>A triple-branch architecture involving an audio branch built upon SlowFast. The motivation is to 
+handle scenarios such as whistling, playing saxophone etc. Some details: </p>
+<ul>
+<li>Audio has a higher frequency, so sampled faster than fast branch before lateral connected to fast and slow branch. </li>
+<li>Studied A-&gt;F-&gt;S (sample T of audio, fuse with F, sample T again, fuse with slow), A-&gt;FS (fuse F and S, before fusing with audio), Audiovisual Nonlocal (A-&gt;FS + attention) integrations. </li>
+<li>As audio converges faster, add dropPathway for regularization. </li>
+<li>Add audio-visual syncrhonization task and adopt a curriculum to sample negatives. </li>
+</ul>
+<h3 id="x3d-expanding-architectures-for-efficient-video-recognition">X3D: Expanding Architectures for Efficient Video Recognition</h3>
+<p>The motivation is to answer the questions raised in Section 3--different tradeoffs between accuracy and computation.</p>
+<ul>
+<li>Baseline: X2D which can be interpreted as a slow pathway</li>
+<li>Expand operations in 6 axes (temporal size, frame-rate, spatial resolution, depth or number of layers, width or channel number for layers, bottleneck with).</li>
+<li>Progressive expansion: trade-off accuracy and computational cost. Each step only one axis is changed, similar to coordinate descent in the hyper-parameter space defined by the axes. </li>
+</ul>
+<h3 id="multiscale-vision-transformers">Multiscale Vision Transformers</h3>
+<p>Connecting multiscale feature hiearchies with transformer models. Evalutes on video and image recognition tasks. </p>
+<ul>
+<li>Adopts pooling operation on K, V, Q while maintaining the MHA architecture. </li>
+</ul>
+<h3 id="keeping-your-eye-on-the-ball-trajectory-attention-in-video-transformers">Keeping your eye on the ball: Trajectory attention in video transformers</h3>
+<h2 id="reference">Reference</h2>
+<p><a href="https://arxiv.org/abs/2001.08740">Audiovisual SlowFast</a>,</p>
 
               
             </article>
@@ -573,6 +653,26 @@ The following are the links to the documentation of the predefined input nodes a
       </main>
       
         <footer class="md-footer">
+  
+    <nav class="md-footer__inner md-grid" aria-label="Footer">
+      
+        
+        <a href="../../multimodal/overview/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Overview" rel="prev">
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+          </div>
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                Previous
+              </span>
+              Overview
+            </div>
+          </div>
+        </a>
+      
+      
+    </nav>
   
   <div class="md-footer-meta md-typeset">
     <div class="md-footer-meta__inner md-grid">
