@@ -502,6 +502,40 @@
     Keeping your eye on the ball: Trajectory attention in video transformers
   </a>
   
+    <nav class="md-nav" aria-label="Keeping your eye on the ball: Trajectory attention in video transformers">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#before-attention" class="md-nav__link">
+    Before Attention
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#spatial-joint-attention" class="md-nav__link">
+    Spatial Joint Attention
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#temporal-attention" class="md-nav__link">
+    Temporal Attention
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#approximate-attention" class="md-nav__link">
+    Approximate Attention
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
         
       </ul>
@@ -591,6 +625,40 @@
     Keeping your eye on the ball: Trajectory attention in video transformers
   </a>
   
+    <nav class="md-nav" aria-label="Keeping your eye on the ball: Trajectory attention in video transformers">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#before-attention" class="md-nav__link">
+    Before Attention
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#spatial-joint-attention" class="md-nav__link">
+    Spatial Joint Attention
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#temporal-attention" class="md-nav__link">
+    Temporal Attention
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#approximate-attention" class="md-nav__link">
+    Approximate Attention
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
         
       </ul>
@@ -642,6 +710,78 @@ handle scenarios such as whistling, playing saxophone etc. Some details: </p>
 <li>Adopts pooling operation on K, V, Q while maintaining the MHA architecture. </li>
 </ul>
 <h3 id="keeping-your-eye-on-the-ball-trajectory-attention-in-video-transformers">Keeping your eye on the ball: Trajectory attention in video transformers</h3>
+<p>Model temporal correspondences to facilitate learning about dynamic scenes. Propose a variant of self-attention,trajectory-attention, which aims to share information along the motion path, rather than pooling axially along
+the temporal dim or over entire space-time feature volume.</p>
+<ul>
+<li>Pooling along motion trajectories as opposed to pooling along across temporal dimension or 3D space-time feature volume.</li>
+<li>Video self-attention: To reduce the quadratic complexity in space and time, previous methods either interleave or stack 
+time/space attention in a sequence. This work performs attention along trajectories. </li>
+<li>Approximating attention - Orthoformer</li>
+</ul>
+<h4 id="before-attention">Before Attention</h4>
+<div class="highlight"><pre><span></span><code><span class="n">B</span><span class="p">,</span> <span class="n">N</span><span class="p">,</span> <span class="n">C</span> <span class="o">=</span> <span class="n">x</span><span class="o">.</span><span class="n">shape</span>
+<span class="n">P</span> <span class="o">=</span> <span class="n">seq_len</span>
+<span class="n">F</span> <span class="o">=</span> <span class="n">num_frames</span>
+<span class="n">h</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">num_heads</span>
+
+<span class="c1"># project x to q, k, v vaalues</span>
+<span class="n">q</span><span class="p">,</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">qkv</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="o">.</span><span class="n">chunk</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="n">dim</span><span class="o">=-</span><span class="mi">1</span><span class="p">)</span>
+
+<span class="c1"># Reshape: &#39;b n (h d) -&gt; (b h) n d&#39;</span>
+<span class="n">q</span><span class="p">,</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="o">=</span> <span class="nb">map</span><span class="p">(</span>
+    <span class="k">lambda</span> <span class="n">t</span><span class="p">:</span> <span class="n">rearrange</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="s1">&#39;b n (h d) -&gt; (b h) n d&#39;</span><span class="p">,</span> <span class="n">h</span><span class="o">=</span><span class="n">h</span><span class="p">),</span> <span class="p">(</span><span class="n">q</span><span class="p">,</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span><span class="p">))</span>
+
+<span class="c1"># remove CLS token from q, k, v</span>
+<span class="p">(</span><span class="n">cls_q</span><span class="p">,</span> <span class="n">q_</span><span class="p">),</span> <span class="p">(</span><span class="n">cls_k</span><span class="p">,</span> <span class="n">k_</span><span class="p">),</span> <span class="p">(</span><span class="n">cls_v</span><span class="p">,</span> <span class="n">v_</span><span class="p">)</span> <span class="o">=</span> <span class="nb">map</span><span class="p">(</span>
+    <span class="k">lambda</span> <span class="n">t</span><span class="p">:</span> <span class="p">(</span><span class="n">t</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">:</span><span class="mi">1</span><span class="p">],</span> <span class="n">t</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">:]),</span> <span class="p">(</span><span class="n">q</span><span class="p">,</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span><span class="p">))</span>
+
+<span class="c1"># let CLS token attend to key / values of all patches across time and space</span>
+<span class="n">cls_out</span> <span class="o">=</span> <span class="n">qkv_attn</span><span class="p">(</span><span class="n">cls_q</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">scale</span><span class="p">,</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span><span class="p">)</span>
+<span class="n">cls_out</span> <span class="o">=</span> <span class="n">rearrange</span><span class="p">(</span><span class="n">cls_out</span><span class="p">,</span> <span class="sa">f</span><span class="s1">&#39;(b h) f d -&gt; b f (h d)&#39;</span><span class="p">,</span> <span class="n">f</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">h</span><span class="o">=</span><span class="n">h</span><span class="p">)</span>
+</code></pre></div>
+<h4 id="spatial-joint-attention">Spatial Joint Attention</h4>
+<p>Basically, the attention is TS x TS, to be multiplied with value T x S x D. The S dimension is multiplied out.<br />
+<img alt="traj" src="../img/traj-atten.png" />
+<div class="highlight"><pre><span></span><code><span class="c1"># Using full attention</span>
+<span class="n">q_dot_k</span> <span class="o">=</span> <span class="n">q_</span> <span class="o">@</span> <span class="n">k_</span><span class="o">.</span><span class="n">transpose</span><span class="p">(</span><span class="o">-</span><span class="mi">2</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">q_dot_k</span> <span class="o">=</span> <span class="n">rearrange</span><span class="p">(</span><span class="n">q_dot_k</span><span class="p">,</span> <span class="s1">&#39;b q (f n) -&gt; b q f n&#39;</span><span class="p">,</span> <span class="n">f</span><span class="o">=</span><span class="n">F</span><span class="p">)</span>  <span class="c1">#Bh x TS x T x S</span>
+<span class="n">space_attn</span> <span class="o">=</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">scale</span> <span class="o">*</span> <span class="n">q_dot_k</span><span class="p">)</span><span class="o">.</span><span class="n">softmax</span><span class="p">(</span><span class="n">dim</span><span class="o">=-</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">attn</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">attn_drop</span><span class="p">(</span><span class="n">space_attn</span><span class="p">)</span>
+<span class="n">v_</span> <span class="o">=</span> <span class="n">rearrange</span><span class="p">(</span><span class="n">v_</span><span class="p">,</span> <span class="s1">&#39;b (f n) d -&gt; b f n d&#39;</span><span class="p">,</span> <span class="n">f</span><span class="o">=</span><span class="n">F</span><span class="p">,</span> <span class="n">n</span><span class="o">=</span><span class="n">P</span><span class="p">)</span> <span class="c1"># Bh x T x S x D</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">einsum</span><span class="p">(</span><span class="s1">&#39;b q f n, b f n d -&gt; b q f d&#39;</span><span class="p">,</span> <span class="n">attn</span><span class="p">,</span> <span class="n">v_</span><span class="p">)</span> <span class="c1"># Bh x TS x T x D</span>
+</code></pre></div></p>
+<h4 id="temporal-attention">Temporal Attention</h4>
+<p>For query: diagonal of TxT matrix, 1 tokenn per frame -&gt; linear mapping + reorganize multi-head dimension h -&gt;
+B x h x TS x D. </p>
+<p>For key and value, linear mapping + reorganize multi-head dimension h -&gt;: B x h x TS x T x D</p>
+<p>Attn: with query and key, the attention is of shape B x h x TS x T</p>
+<p>Output: with Attn and value, the shape is B x h x TS x D -&gt; B x TS x hD -&gt; linear projection
+<div class="highlight"><pre><span></span><code><span class="c1"># Temporal attention: query is the similarity-aggregated patch</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">rearrange</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="s1">&#39;(b h) s f d -&gt; b s f (h d)&#39;</span><span class="p">,</span> <span class="n">b</span><span class="o">=</span><span class="n">B</span><span class="p">)</span> <span class="c1"># Bh x TS x T x D -&gt; B x TS x T x hD</span>
+<span class="n">x_diag</span> <span class="o">=</span> <span class="n">rearrange</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="s1">&#39;b (g n) f d -&gt; b g n f d&#39;</span><span class="p">,</span> <span class="n">g</span><span class="o">=</span><span class="n">F</span><span class="p">)</span> <span class="c1"># B x TS x T x hD -&gt; B x T x S x T x hD</span>
+<span class="n">x_diag</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">diagonal</span><span class="p">(</span><span class="n">x_diag</span><span class="p">,</span> <span class="n">dim1</span><span class="o">=-</span><span class="mi">4</span><span class="p">,</span> <span class="n">dim2</span><span class="o">=-</span><span class="mi">2</span><span class="p">)</span> <span class="c1"># B x T x S x T x hD -&gt; B x S x hD x T</span>
+<span class="n">x_diag</span> <span class="o">=</span> <span class="n">rearrange</span><span class="p">(</span><span class="n">x_diag</span><span class="p">,</span> <span class="sa">f</span><span class="s1">&#39;b n d f -&gt; b (f n) d&#39;</span><span class="p">,</span> <span class="n">f</span><span class="o">=</span><span class="n">F</span><span class="p">)</span> <span class="c1"># B x S x hD x T -&gt; B x TS x hD</span>
+<span class="n">q2</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">proj_q</span><span class="p">(</span><span class="n">x_diag</span><span class="p">)</span>
+
+<span class="n">k2</span><span class="p">,</span> <span class="n">v2</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">proj_kv</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="o">.</span><span class="n">chunk</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="n">dim</span><span class="o">=-</span><span class="mi">1</span><span class="p">)</span> 
+
+<span class="n">q2</span> <span class="o">=</span> <span class="n">rearrange</span><span class="p">(</span><span class="n">q2</span><span class="p">,</span> <span class="sa">f</span><span class="s1">&#39;b s (h d) -&gt; b h s d&#39;</span><span class="p">,</span> <span class="n">h</span><span class="o">=</span><span class="n">h</span><span class="p">)</span> <span class="c1"># query: B x TS x hD -&gt; B x h x TS x D</span>
+<span class="n">q2</span> <span class="o">*=</span> <span class="bp">self</span><span class="o">.</span><span class="n">scale</span>
+<span class="n">k2</span><span class="p">,</span> <span class="n">v2</span> <span class="o">=</span> <span class="nb">map</span><span class="p">(</span> 
+    <span class="k">lambda</span> <span class="n">t</span><span class="p">:</span> <span class="n">rearrange</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="sa">f</span><span class="s1">&#39;b s f (h d) -&gt; b h s f d&#39;</span><span class="p">,</span> <span class="n">f</span><span class="o">=</span><span class="n">F</span><span class="p">,</span>  <span class="n">h</span><span class="o">=</span><span class="n">h</span><span class="p">),</span> <span class="p">(</span><span class="n">k2</span><span class="p">,</span> <span class="n">v2</span><span class="p">))</span>  <span class="c1"># key, value: B x h x TS x T x D</span>
+<span class="n">attn</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">einsum</span><span class="p">(</span><span class="s1">&#39;b h s d, b h s f d -&gt; b h s f&#39;</span><span class="p">,</span> <span class="n">q2</span><span class="p">,</span> <span class="n">k2</span><span class="p">)</span>
+<span class="n">attn</span> <span class="o">=</span> <span class="n">attn</span><span class="o">.</span><span class="n">softmax</span><span class="p">(</span><span class="n">dim</span><span class="o">=-</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">einsum</span><span class="p">(</span><span class="s1">&#39;b h s f, b h s f d -&gt; b h s d&#39;</span><span class="p">,</span> <span class="n">attn</span><span class="p">,</span> <span class="n">v2</span><span class="p">)</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">rearrange</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="sa">f</span><span class="s1">&#39;b h s d -&gt; b s (h d)&#39;</span><span class="p">)</span>
+
+<span class="c1"># concat back the cls token</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">cat</span><span class="p">((</span><span class="n">cls_out</span><span class="p">,</span> <span class="n">x</span><span class="p">),</span> <span class="n">dim</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+
+<span class="n">x</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">proj</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+<span class="n">x</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">proj_drop</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+</code></pre></div></p>
+<h4 id="approximate-attention">Approximate Attention</h4>
+<p>Utilize probability to optimize TS x TS computational cost</p>
 <h2 id="reference">Reference</h2>
 <p><a href="https://arxiv.org/abs/2001.08740">Audiovisual SlowFast</a>,
 <a href="https://arxiv.org/abs/2004.04730">X3D</a>,
