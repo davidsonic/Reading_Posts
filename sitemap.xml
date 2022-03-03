@@ -86,6 +86,16 @@
          <changefreq>daily</changefreq>
     </url>
     <url>
+         <loc>https://davidsonic.github.io/Reading_Posts/3dvision/recon/</loc>
+         <lastmod>2022-03-03</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://davidsonic.github.io/Reading_Posts/3dvision/view-synthesis/</loc>
+         <lastmod>2022-03-03</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
          <loc>https://davidsonic.github.io/Reading_Posts/detections/faster-rcnn/</loc>
          <lastmod>2022-03-03</lastmod>
          <changefreq>daily</changefreq>
@@ -97,6 +107,11 @@
     </url>
     <url>
          <loc>https://davidsonic.github.io/Reading_Posts/detections/yolo-series/</loc>
+         <lastmod>2022-03-03</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://davidsonic.github.io/Reading_Posts/embody/overview/</loc>
          <lastmod>2022-03-03</lastmod>
          <changefreq>daily</changefreq>
     </url>
